@@ -7,9 +7,10 @@ public class Teste {
         a.inserir(8);
         a.inserir(6);
         a.inserir(9);
-        a.inserir(3);
         a.inserir(2);
-        a.inserir(1);
+        a.inserir(10);
+        a.inserir(7);
+        a.inserir(11);
         System.out.println(a.printar());
         System.out.println("---------------------------------");
         System.out.println("Árvore Rubro Negra");

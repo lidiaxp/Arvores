@@ -49,37 +49,10 @@ public class ArvoreAvl {
     }
 
     public void quemBalancear(No n) {
-        if (raiz.esquerda != null) {
-            if (raiz.esquerda.direita != null) {
-                if (raiz.esquerda.direita.esquerda != null || raiz.esquerda.direita.direita != null) {
-                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
-                        balancear(n.pai.pai);
-                    }
-                }
-            }
-        }
-        if (raiz.esquerda != null) {
-            if (raiz.esquerda.esquerda != null) {
-                if (raiz.esquerda.esquerda.esquerda != null || raiz.esquerda.esquerda.direita != null) {
-                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
-                        balancear(n.pai.pai);
-                    }
-                }
-            }
-        }
-        if (raiz.direita != null) {
-            if (raiz.direita.direita != null) {
-                if (raiz.direita.direita.esquerda != null || raiz.direita.direita.direita != null) {
-                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
-                        balancear(n.pai.pai);
-                    }
-                }
-            }
-        }
-        if (raiz.direita != null) {
-            if (raiz.direita.esquerda != null) {
-                if (raiz.direita.esquerda.esquerda != null || raiz.direita.esquerda.direita != null) {
-                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+        if (n.pai != null) {
+            if (n.pai.pai != null) {
+                if (n.pai.pai.pai != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) >= 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) >= 1) {
                         balancear(n.pai.pai);
                     }
                 }
