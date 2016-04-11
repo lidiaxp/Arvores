@@ -39,13 +39,21 @@ public class ArvoreRN {
                 }
             }
         }
-        if (raiz.esquerda != null || raiz.direita != null) {
-/*            if (raiz.esquerda.esquerda != null || raiz.esquerda.direita != null || raiz.direita.esquerda != null || raiz.direita.direita != null) {
+        if (raiz.esquerda != null) {
+            if (raiz.esquerda.esquerda != null || raiz.esquerda.direita != null || raiz.direita.esquerda != null || raiz.direita.direita != null) {
                 if (alturaEsquerda(n.pai.pai) - alturaDireita(n.pai.pai) > 1 || alturaDireita(n.pai.pai) - alturaEsquerda(n.pai.pai) > 1) {
                     balancear(n.pai.pai);
                 }
                 balancearCores(n.pai.pai, n);
-            }*/
+            }
+        }
+        if (raiz.direita != null) {
+            if (raiz.direita.esquerda != null || raiz.direita.direita != null) {
+                if (alturaEsquerda(n.pai.pai) - alturaDireita(n.pai.pai) > 1 || alturaDireita(n.pai.pai) - alturaEsquerda(n.pai.pai) > 1) {
+                    balancear(n.pai.pai);
+                }
+                balancearCores(n.pai.pai, n);
+            }
         }
     }
 
