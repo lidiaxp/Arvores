@@ -22,35 +22,71 @@ public class ArvoreRN {
 
     public void inserir(int valor) {
         int x = 0;
-        No n = new No(valor, null, true);
         if (raiz == null) {
             raiz = new No(valor, null, false);
         } else {
             No aux = raiz;
-            if (n.valor > raiz.valor) {
-                if (raiz.direita == null) {
-                    n.pai = raiz;
-                    raiz.direita = n;
-                }
-            } else {
-                if (raiz.esquerda == null) {
-                    n.pai = raiz;
-                    raiz.esquerda = n;
+            while (x == 0) {
+                if (valor > aux.valor) {
+                    if (aux.direita == null) {
+                        No n = new No(valor, aux, true);
+                        aux.direita = n;
+                        quemBalancear(n);
+                        x = 1;
+                    } else {
+                        aux = aux.direita;
+                    }
+                } else {
+                    if (aux.esquerda == null) {
+                        No n = new No(valor, aux, true);
+                        aux.esquerda = n;
+                        quemBalancear(n);
+                        x = 1;
+                    } else {
+                        aux = aux.esquerda;
+                    }
                 }
             }
         }
+    }
+
+    public void quemBalancear(No n) {
         if (raiz.esquerda != null) {
-            if (raiz.esquerda.esquerda != null || raiz.esquerda.direita != null || raiz.direita.esquerda != null || raiz.direita.direita != null) {
-                if (alturaEsquerda(n.pai.pai) - alturaDireita(n.pai.pai) > 1 || alturaDireita(n.pai.pai) - alturaEsquerda(n.pai.pai) > 1) {
-                    balancear(n.pai.pai);
+            if (raiz.esquerda.direita != null) {
+                if (raiz.esquerda.direita.esquerda != null || raiz.esquerda.direita.direita != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+                        balancear(n.pai.pai);
+                    }
+                }
+                balancearCores(n.pai.pai, n);
+            }
+        }
+        if (raiz.esquerda != null) {
+            if (raiz.esquerda.esquerda != null) {
+                if (raiz.esquerda.esquerda.esquerda != null || raiz.esquerda.esquerda.direita != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+                        balancear(n.pai.pai);
+                    }
                 }
                 balancearCores(n.pai.pai, n);
             }
         }
         if (raiz.direita != null) {
-            if (raiz.direita.esquerda != null || raiz.direita.direita != null) {
-                if (alturaEsquerda(n.pai.pai) - alturaDireita(n.pai.pai) > 1 || alturaDireita(n.pai.pai) - alturaEsquerda(n.pai.pai) > 1) {
-                    balancear(n.pai.pai);
+            if (raiz.direita.direita != null) {
+                if (raiz.direita.direita.esquerda != null || raiz.direita.direita.direita != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+                        balancear(n.pai.pai);
+                    }
+                }
+                balancearCores(n.pai.pai, n);
+            }
+        }
+        if (raiz.direita != null) {
+            if (raiz.direita.esquerda != null) {
+                if (raiz.direita.esquerda.esquerda != null || raiz.direita.esquerda.direita != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+                        balancear(n.pai.pai);
+                    }
                 }
                 balancearCores(n.pai.pai, n);
             }
@@ -59,34 +95,47 @@ public class ArvoreRN {
 
     public void balancearCores(No n, No filho) {
         if (filho.pai.cor) {
-            if (alturaEsquerda(n.pai) > alturaDireita(n.pai) && alturaEsquerda(n) > alturaDireita(n)) {
+            int AE = alturaEsquerda(n);
+            int AD = alturaDireita(n);
+            if (AE > AD && AE > AD) {
                 filho.pai.cor = false;
                 n.cor = true;
-            } else if (alturaEsquerda(n.pai) < alturaDireita(n.pai) && alturaEsquerda(n) < alturaDireita(n)) {
+            } else if (AE < AD && AE < AD) {
                 filho.pai.cor = false;
                 n.cor = true;
-            } else if (alturaEsquerda(n.pai) > alturaDireita(n.pai) && alturaEsquerda(n) < alturaDireita(n)) {
+            } else if (AE > AD && AE < AD) {
                 filho.cor = false;
                 n.cor = true;
-            } else if (alturaEsquerda(n.pai) < alturaDireita(n.pai) && alturaEsquerda(n) > alturaDireita(n)) {
+            } else if (AE < AD && AE > AD) {
                 filho.cor = false;
                 n.cor = true;
             }
-            balancear(n);
+            balancear(filho);
+        }
+        if (filho.cor) {
+            filho.cor = false;
+            filho.pai.cor = true;
+            filho.pai.pai.cor = false;
         }
         if (filho.pai.pai.esquerda == filho.pai.pai) {
-            if (n.direita.cor) {
+            if (n.esquerda != null && n.direita.cor) {
                 n.direita.cor = false;
                 n.esquerda.cor = false;
             }
         } else {
-            if (n.esquerda.cor) {
+            if (n.esquerda != null && n.esquerda.cor) {
                 n.direita.cor = false;
                 n.esquerda.cor = false;
             }
         }
-        if (n.pai.cor && n.cor) {
-            balancearCores(n.pai.pai, n);
+        if (alturaEsquerdaCor(filho.pai) > alturaDireitaCor(filho.pai)) {
+            if (filho.pai.direita != null) {
+                filho.pai.direita.cor = false;
+            }
+        } else {
+            if (filho.pai.esquerda != null) {
+                filho.pai.esquerda.cor = false;
+            }
         }
         raiz.cor = false;
     }
@@ -94,6 +143,7 @@ public class ArvoreRN {
     public int alturaEsquerda(No n) {
         int alturaEsquerda = 0;
         while (n.esquerda != null) {
+            n = n.esquerda;
             alturaEsquerda++;
         }
         return alturaEsquerda;
@@ -102,9 +152,36 @@ public class ArvoreRN {
     public int alturaDireita(No n) {
         int alturaDireita = 0;
         while (n.direita != null) {
+            n = n.direita;
             alturaDireita++;
         }
         return alturaDireita;
+    }
+
+    public int alturaEsquerdaCor(No n) {
+        int alturaEsquerdaCor = 0;
+        if (n.esquerda == null) {
+            return 0;
+        } else {
+            while (n.esquerda != null && !n.esquerda.cor) {
+                n = n.esquerda;
+                alturaEsquerdaCor++;
+            }
+        }
+        return alturaEsquerdaCor;
+    }
+
+    public int alturaDireitaCor(No n) {
+        int alturaDireitaCor = 0;
+        if (n.direita == null) {
+            return 0;
+        } else {
+            while (n.direita != null && !n.direita.cor) {
+                n = n.direita;
+                alturaDireitaCor++;
+            }
+        }
+        return alturaDireitaCor;
     }
 
     public void balancear(No n) {

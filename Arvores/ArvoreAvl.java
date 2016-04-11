@@ -20,34 +20,68 @@ public class ArvoreAvl {
 
     public void inserir(int valor) {
         int x = 0;
-        No n = new No(valor, null);
         if (raiz == null) {
-            raiz = n;
+            raiz = new No(valor, null);
         } else {
             No aux = raiz;
-            if (n.valor > raiz.valor) {
-                if (raiz.direita == null) {
-                    n.pai = raiz;
-                    raiz.direita = n;
+            while (x == 0) {
+                if (valor > aux.valor) {
+                    if (aux.direita == null) {
+                        No n = new No(valor, aux);
+                        aux.direita = n;
+                        quemBalancear(n);
+                        x = 1;
+                    } else {
+                        aux = aux.direita;
+                    }
+                } else {
+                    if (aux.esquerda == null) {
+                        No n = new No(valor, aux);
+                        aux.esquerda = n;
+                        quemBalancear(n);
+                        x = 1;
+                    } else {
+                        aux = aux.esquerda;
+                    }
                 }
-            } else {
-                if (raiz.esquerda == null) {
-                    n.pai = raiz;
-                    raiz.esquerda = n;
+            }
+        }
+    }
+
+    public void quemBalancear(No n) {
+        if (raiz.esquerda != null) {
+            if (raiz.esquerda.direita != null) {
+                if (raiz.esquerda.direita.esquerda != null || raiz.esquerda.direita.direita != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+                        balancear(n.pai.pai);
+                    }
                 }
             }
         }
         if (raiz.esquerda != null) {
-            if (raiz.esquerda.esquerda != null || raiz.esquerda.direita != null ) {
-                if (alturaEsquerda(n.pai.pai) - alturaDireita(n.pai.pai) > 1 || alturaDireita(n.pai.pai) - alturaEsquerda(n.pai.pai) > 1) {
-                    balancear(n.pai.pai);
+            if (raiz.esquerda.esquerda != null) {
+                if (raiz.esquerda.esquerda.esquerda != null || raiz.esquerda.esquerda.direita != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+                        balancear(n.pai.pai);
+                    }
                 }
             }
         }
         if (raiz.direita != null) {
-            if (raiz.direita.esquerda != null || raiz.direita.direita != null ) {
-                if (alturaEsquerda(n.pai.pai) - alturaDireita(n.pai.pai) > 1 || alturaDireita(n.pai.pai) - alturaEsquerda(n.pai.pai) > 1) {
-                    balancear(n.pai.pai);
+            if (raiz.direita.direita != null) {
+                if (raiz.direita.direita.esquerda != null || raiz.direita.direita.direita != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+                        balancear(n.pai.pai);
+                    }
+                }
+            }
+        }
+        if (raiz.direita != null) {
+            if (raiz.direita.esquerda != null) {
+                if (raiz.direita.esquerda.esquerda != null || raiz.direita.esquerda.direita != null) {
+                    if (alturaEsquerda(n.pai.pai.pai) - alturaDireita(n.pai.pai.pai) > 1 || alturaDireita(n.pai.pai.pai) - alturaEsquerda(n.pai.pai.pai) > 1) {
+                        balancear(n.pai.pai);
+                    }
                 }
             }
         }
@@ -56,6 +90,7 @@ public class ArvoreAvl {
     public int alturaEsquerda(No n) {
         int alturaEsquerda = 0;
         while (n.esquerda != null) {
+            n = n.esquerda;
             alturaEsquerda++;
         }
         return alturaEsquerda;
@@ -64,6 +99,7 @@ public class ArvoreAvl {
     public int alturaDireita(No n) {
         int alturaDireita = 0;
         while (n.direita != null) {
+            n = n.direita;
             alturaDireita++;
         }
         return alturaDireita;
