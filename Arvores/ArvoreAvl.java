@@ -90,16 +90,16 @@ public class ArvoreAvl {
         }
     }
 
-    public void rotacaoEsquerda(No n) {
-        if (n.pai.esquerda == n) {
-            No aux = n.pai.esquerda;
-            No aux2 = n.pai.esquerda.direita.esquerda;
+    public void rotacaoEsquerda(No n) {  // rotação esquerda no nó n
+        if (n.pai.esquerda == n) {   //checa se o nó n é igual ao nó pai na esquerda. se sim:
+            No aux = n.pai.esquerda;   // atribui o nó pai da esquerda a um nó auxiliar
+            No aux2 = n.pai.esquerda.direita.esquerda;  //atribui o 
             n.pai.esquerda = n.pai.esquerda.direita;
             n.pai.esquerda.esquerda = aux;
             n.pai.esquerda.esquerda.direita = aux2;
-        } else {
-            No aux = n.pai.direita;
-            No aux2 = n.pai.direita.direita.esquerda;
+        } else {  //se não:
+            No aux = n.pai.direita;  //atrubui o nó pai da direita a um nó auxiliar
+            No aux2 = n.pai.direita.direita.esquerda;  
             n.pai.direita = n.pai.direita.direita;
             n.pai.direita.esquerda = aux;
             n.pai.direita.esquerda.direita = aux2;
