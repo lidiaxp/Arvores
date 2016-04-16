@@ -90,19 +90,19 @@ public class ArvoreAvl {
         }
     }
 
-    public void rotacaoEsquerda(No n) {  // rotação esquerda no nó n
+    public void rotacaoEsquerda(No n) {  //rotação esquerda no nó n
         if (n.pai.esquerda == n) {   //checa se o nó n é igual ao nó pai na esquerda. se sim:
-            No aux = n.pai.esquerda;   // atribui o nó pai da esquerda a um nó auxiliar
-            No aux2 = n.pai.esquerda.direita.esquerda;  //atribui o 
-            n.pai.esquerda = n.pai.esquerda.direita;
-            n.pai.esquerda.esquerda = aux;
-            n.pai.esquerda.esquerda.direita = aux2;
+            No aux = n.pai.esquerda;   //atribui a o nó da esquerda à aux
+            No aux2 = n.pai.esquerda.direita.esquerda;  //atribui a folha de caminho pai-esquerda-direita-esquerda à aux2
+            n.pai.esquerda = n.pai.esquerda.direita;  //atribui a folha de caminho pai-esquerda-direita ao nó de caminho pai-esquerda-direita, iniciando a rotação
+            n.pai.esquerda.esquerda = aux;  //atribui aux à folha de caminho pai-esquerda-esquerda 
+            n.pai.esquerda.esquerda.direita = aux2;  //atribui aux2 à folha de caminho pai-esquerda-esquerda-direita, terminando a rotação
         } else {  //se não:
-            No aux = n.pai.direita;  //atrubui o nó pai da direita a um nó auxiliar
-            No aux2 = n.pai.direita.direita.esquerda;  
-            n.pai.direita = n.pai.direita.direita;
-            n.pai.direita.esquerda = aux;
-            n.pai.direita.esquerda.direita = aux2;
+            No aux = n.pai.direita;  //atrubui o nó de caminho pai-direita à aux
+            No aux2 = n.pai.direita.direita.esquerda;   //atribui a folha de caminho pai-direita-direita-esquerda à aux2
+            n.pai.direita = n.pai.direita.direita;  //atribui a folha de caminho pai-direita-direita ao nó de caminho pai-direita-direita, iniciando a rotação
+            n.pai.direita.esquerda = aux;  //atribui aux à folha de caminho pai-direita-esquerda
+            n.pai.direita.esquerda.direita = aux2;  //atribui aux2 à folha de caminho pai-direita-esquerda-direita, concluindo a rotação
         }
     }
 
