@@ -124,14 +124,14 @@ public class ArvoreAvl {
         }
     }
 
-    public void rotacaoEsquerda(No n) {      //faz a rotaçao para esquerda do no
-        if (n.pai.esquerda == n) {
+    public void rotacaoEsquerda(No n) {       //faz a rotaçao esquerda do no
+        if (n.pai.esquerda == n) {           //se o no for o filho da esquerda
             No aux = n.pai.esquerda;
             No aux2 = n.pai.esquerda.direita.esquerda;
             n.pai.esquerda = n.pai.esquerda.direita;
             n.pai.esquerda.esquerda = aux;
             n.pai.esquerda.esquerda.direita = aux2;
-        } else {
+        } else {                              //se o no for o filho da direita
             No aux = n.pai.direita;
             No aux2 = n.pai.direita.direita.esquerda;
             n.pai.direita = n.pai.direita.direita;
@@ -140,14 +140,14 @@ public class ArvoreAvl {
         }
     }
 
-    public void rotacaoDireita(No n) {         //faz a rotaçao para direita do no
-        if (n.pai.esquerda == n) {
+    public void rotacaoDireita(No n) {    //faz a rotaçao direita do no
+        if (n.pai.esquerda == n) {        //se o no for o filho da esquerda
             No aux = n.pai.esquerda;
             No aux2 = n.pai.esquerda.esquerda.direita;
             n.pai.esquerda = n.pai.esquerda.esquerda;
             n.pai.esquerda.direita = aux;
             n.pai.esquerda.direita.esquerda = aux2;
-        } else {
+        } else {                          //se o no for o filho da direita
             No aux = n.pai.direita;
             No aux2 = n.pai.direita.esquerda.direita;
             n.pai.direita = n.pai.direita.esquerda;
@@ -157,13 +157,13 @@ public class ArvoreAvl {
     }
 
     public void rotacaoDuplaEsquerda(No n) {          //faz a rotaçao dupla esquerda do no
-        rotacaoDireita(n.direita);
-        rotacaoEsquerda(n);
+        rotacaoDireita(n.direita);                    //faz uma rotaçao de direita com o no da direita(o bisavo)
+        rotacaoEsquerda(n);                           //e depois uma rotaçao de esquerda com o avo
     }
 
     public void rotacaoDuplaDireita(No n) {             //faz a rotaçao dupla direita do no
-        rotacaoEsquerda(n.esquerda);
-        rotacaoDireita(n);
+        rotacaoEsquerda(n.esquerda);                    //faz uma rotaçao de direita com o no da esquerda(o bisavo)
+        rotacaoDireita(n);                              //e depois uma rotaçao de esquerda com o avo
     }
 
     public String printar() {       //metodo para printar a arvore
