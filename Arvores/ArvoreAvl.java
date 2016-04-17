@@ -123,13 +123,13 @@ public class ArvoreAvl {
     }
 
     public void rotacaoDuplaEsquerda(No n) {
-        rotacaoDireita(n.direita);
-        rotacaoEsquerda(n);
+        rotacaoDireita(n.direita);   //performa uma rotação direita no nó
+        rotacaoEsquerda(n);  //performa uma rotação esquerda no nó n
     }
 
     public void rotacaoDuplaDireita(No n) {
-        rotacaoEsquerda(n.esquerda);
-        rotacaoDireita(n);
+        rotacaoEsquerda(n.esquerda);   //performa uma rotação esquerda no 
+        rotacaoDireita(n);  //performa uma rotação direita no nó n
     }
 
     public String printar() {
