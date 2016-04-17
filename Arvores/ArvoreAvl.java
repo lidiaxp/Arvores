@@ -90,35 +90,35 @@ public class ArvoreAvl {
         }
     }
 
-    public void rotacaoEsquerda(No n) {  //rotação esquerda no nó n
-        if (n.pai.esquerda == n) {   //checa se o nó n é igual ao nó pai na esquerda. se sim:
-            No aux = n.pai.esquerda;   //atribui a o nó da esquerda à aux
-            No aux2 = n.pai.esquerda.direita.esquerda;  //atribui a folha de caminho pai-esquerda-direita-esquerda à aux2
-            n.pai.esquerda = n.pai.esquerda.direita;  //atribui a folha de caminho pai-esquerda-direita ao nó de caminho pai-esquerda-direita, iniciando a rotação
-            n.pai.esquerda.esquerda = aux;  //atribui aux à folha de caminho pai-esquerda-esquerda 
-            n.pai.esquerda.esquerda.direita = aux2;  //atribui aux2 à folha de caminho pai-esquerda-esquerda-direita, terminando a rotação
-        } else {  //se não:
-            No aux = n.pai.direita;  //atrubui o nó de caminho pai-direita à aux
-            No aux2 = n.pai.direita.direita.esquerda;   //atribui a folha de caminho pai-direita-direita-esquerda à aux2
-            n.pai.direita = n.pai.direita.direita;  //atribui a folha de caminho pai-direita-direita ao nó de caminho pai-direita-direita, iniciando a rotação
-            n.pai.direita.esquerda = aux;  //atribui aux à folha de caminho pai-direita-esquerda
-            n.pai.direita.esquerda.direita = aux2;  //atribui aux2 à folha de caminho pai-direita-esquerda-direita, concluindo a rotação
+    public void rotacaoEsquerda(No n) {    //rotação esquerda no nó n
+        if (n.pai.esquerda == n) {     //checa se o nó n desbalanceado é o nó pai na esquerda. Se sim:
+            No aux = n.pai.esquerda;     //atribui a o nó pai da esquerda à aux
+            No aux2 = n.pai.esquerda.direita.esquerda;    //atribui a folha de caminho pai da esquerda-direita-esquerda à aux2
+            n.pai.esquerda = n.pai.esquerda.direita;   //atribui a folha de caminho pai da esquerda-direita ao nó pai da esquerda, iniciando a rotação
+            n.pai.esquerda.esquerda = aux;    //atribui aux à folha de caminho pai da esquerda-esquerda 
+            n.pai.esquerda.esquerda.direita = aux2;    //atribui aux2 à folha de caminho pai da esquerda-esquerda-direita, terminando a rotação
+        } else {    //se não, ele ele performa a rotação no nó pai da direita, pois assume-se que esse é o desbalanceado:
+            No aux = n.pai.direita;   //atrubui o nó pai da direita à aux
+            No aux2 = n.pai.direita.direita.esquerda;    //atribui a folha de caminho pai da direita-direita-esquerda à aux2
+            n.pai.direita = n.pai.direita.direita;   //atribui a folha de caminho pai da direita-direita ao nó pai da direita, iniciando a rotação
+            n.pai.direita.esquerda = aux;   //atribui aux à folha de caminho pai da direita-esquerda
+            n.pai.direita.esquerda.direita = aux2;   //atribui aux2 à folha de caminho pai da direita-esquerda-direita, concluindo a rotação
         }
     }
 
-    public void rotacaoDireita(No n) {
-        if (n.pai.esquerda == n) {
-            No aux = n.pai.esquerda;
-            No aux2 = n.pai.esquerda.esquerda.direita;
-            n.pai.esquerda = n.pai.esquerda.esquerda;
-            n.pai.esquerda.direita = aux;
-            n.pai.esquerda.direita.esquerda = aux2;
-        } else {
-            No aux = n.pai.direita;
-            No aux2 = n.pai.direita.esquerda.direita;
-            n.pai.direita = n.pai.direita.esquerda;
-            n.pai.direita.direita = aux;
-            n.pai.direita.direita.esquerda = aux2;
+    public void rotacaoDireita(No n) {   //rotação direita no nó n
+        if (n.pai.esquerda == n) {   //checa se o nó n desbalanceado é o nó pai da esquerda. Se sim:
+            No aux = n.pai.esquerda;   //atribui o nó pai da esquerda à aux
+            No aux2 = n.pai.esquerda.esquerda.direita;   //atribui a folha de caminho pai da esquerda-esquerda-direita à aux2
+            n.pai.esquerda = n.pai.esquerda.esquerda;   //atribui a folha de caminho pai da esquerda-esquerda ao nó pai da esquerda, iniciando a rotação
+            n.pai.esquerda.direita = aux;   //atribui aux à folha de caminho pai da esquerda-direita
+            n.pai.esquerda.direita.esquerda = aux2;   //atribui aux2 à folha de caminho pai da esquerda-direita-esquerda, encerrando a rotação
+        } else {    //se não, ele ele performa a rotação no nó pai da direita, pois assume-se que esse é o desbalanceado:
+            No aux = n.pai.direita;   //atrubui o nó pai da direita à aux
+            No aux2 = n.pai.direita.esquerda.direita;     //atribui a folha de caminho pai da direita-esquerda-direita à aux2
+            n.pai.direita = n.pai.direita.esquerda;     //atribui a folha de caminho pai da direita-esquerda ao nó pai da direita, iniciando a rotação
+            n.pai.direita.direita = aux;    //atribui aux à folha de caminho pai da direita-direita-direita
+            n.pai.direita.direita.esquerda = aux2;   // atribui a aux2 à folha de caminho pai da direita-direita-esquerda
         }
     }
 
